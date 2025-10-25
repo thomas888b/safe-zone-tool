@@ -1,169 +1,152 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Style-Type" content="text/css">
-  <title></title>
-  <meta name="Generator" content="Cocoa HTML Writer">
-  <meta name="CocoaVersion" content="2685.1">
-  <style type="text/css">
-    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
-    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Safe Zone Viewer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Use Inter font */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        /* Custom styles for a nicer file input button */
+        .file-btn {
+            background-color: #4f80e1; /* Your new button color */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem; /* rounded-lg */
+            cursor: pointer;
+            font-weight: 500; /* medium */
+            transition: background-color 0.2s;
+            display: inline-block; /* Added for proper layout */
+            text-align: center;
+        }
+        .file-btn:hover {
+            background-color: #4069b4; /* A slightly darker shade for hover */
+        }
+
+        /* Removed the .change-template-link styles as it's no longer used */
+    </style>
 </head>
-<body>
-<p class="p1">&lt;!DOCTYPE html&gt;</p>
-<p class="p1">&lt;html lang="en"&gt;</p>
-<p class="p1">&lt;head&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;Image Safe Zone Viewer&lt;/title&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script src="https://cdn.tailwindcss.com"&gt;&lt;/script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>/* Use Inter font */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-family: 'Inter', sans-serif;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><span class="Apple-converted-space">        </span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>/* Custom styles for a nicer file input button */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.file-btn {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: #4f80e1; /* Your new button color */</p>
-<p class="p1"><span class="Apple-converted-space">            </span>color: white;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>padding: 0.75rem 1.5rem;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>border-radius: 0.5rem; /* rounded-lg */</p>
-<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>font-weight: 500; /* medium */</p>
-<p class="p1"><span class="Apple-converted-space">            </span>transition: background-color 0.2s;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>display: inline-block; /* Added for proper layout */</p>
-<p class="p1"><span class="Apple-converted-space">            </span>text-align: center;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">        </span>.file-btn:hover {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>background-color: #4069b4; /* A slightly darker shade for hover */</p>
-<p class="p1"><span class="Apple-converted-space">        </span>}</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>/* Removed the .change-template-link styles as it's no longer used */</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
-<p class="p1">&lt;/head&gt;</p>
-<p class="p1">&lt;body class="text-gray-100 flex items-center justify-center min-h-screen p-4 md:p-8" style="background-color: #292C44;"&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;main class="w-full max-w-4xl bg-gray-800 p-6 md:p-10 rounded-2xl shadow-2xl"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;h1 class="text-3xl md:text-4xl font-bold text-center text-white mb-6"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>Image Safe Zone Viewer</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/h1&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;p id="instructions" class="text-center text-gray-400 mb-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>Upload an image (.jpg) to check it against the 16:9 safe zone.</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/p&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Controls --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="flex flex-col sm:flex-row sm:items-center sm:justify-center gap-6 mb-8"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- File Upload Button (visible by default) --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div id="imageUploadContainer"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;label for="imageUpload" class="file-btn"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>Upload Image</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/label&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;input type="file" id="imageUpload" class="hidden" accept="image/jpeg"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- All template upload buttons and links have been removed --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Image Preview Area --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="previewContainer" class="hidden bg-gray-900 p-2 rounded-lg border border-gray-700"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- This container is forced to a 16:9 aspect ratio --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="relative w-full aspect-video bg-black rounded-md overflow-hidden"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- The Image (will be letterboxed/pillarboxed inside) --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;img id="imagePreview" src="#" alt="Image Preview" class="absolute inset-0 w-full h-full object-contain z-10"&gt;</p>
-<p class="p2"><span class="Apple-converted-space">                </span></p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- The Safe Zone Overlay --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- This is now a static CSS overlay that mimics your template --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;div id="safeZoneOverlay" class="absolute inset-0 pointer-events-none z-20 flex items-center justify-center"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;!--<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>This inner box defines the "safe area".</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>The box-shadow creates the red overlay *outside* of this box,</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>effectively "cutting out" the center.</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>The border creates the green line.</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>(Proportions are an estimate from your template image)</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>--&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="w-[70%] h-[80%] border-2 border-green-500"<span class="Apple-converted-space"> </span></p>
-<p class="p1"><span class="Apple-converted-space">                         </span>style="box-shadow: 0 0 0 100vmax rgba(239, 68, 68, 0.5);"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><span class="Apple-converted-space">        </span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;!-- Placeholder for when no image is loaded --&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;div id="placeholder" class="flex items-center justify-center h-64 bg-gray-700 rounded-lg border-2 border-dashed border-gray-500"&gt;</p>
-<p class="p1"><span class="Apple-converted-space">            </span>&lt;p class="text-gray-400"&gt;Your 16:9 preview will appear here&lt;/p&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/main&gt;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const imageUpload = document.getElementById('imageUpload');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const imagePreview = document.getElementById('imagePreview');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const previewContainer = document.getElementById('previewContainer');</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const placeholder = document.getElementById('placeholder');</p>
-<p class="p2"><span class="Apple-converted-space">        </span></p>
-<p class="p1"><span class="Apple-converted-space">        </span>// All template-related JS variables have been removed</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>// Text element</p>
-<p class="p1"><span class="Apple-converted-space">        </span>const instructions = document.getElementById('instructions');</p>
-<p class="p2"><br></p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>// Function to handle image upload</p>
-<p class="p1"><span class="Apple-converted-space">        </span>imageUpload.addEventListener('change', (event) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">            </span>const file = event.target.files[0];</p>
-<p class="p1"><span class="Apple-converted-space">            </span>if (file) {</p>
-<p class="p1"><span class="Apple-converted-space">                </span>const reader = new FileReader();</p>
-<p class="p1"><span class="Apple-converted-space">                </span>reader.onload = (e) =&gt; {</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>const dataUrl = e.target.result;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                    </span>// Create an in-memory image to check dimensions</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>const img = new Image();</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>img.onload = function() {</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>const imageWidth = this.naturalWidth;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>const imageHeight = this.naturalHeight;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>const targetRatio = 16 / 9;</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>const imageRatio = imageWidth / imageHeight;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                        </span>// Check if aspect ratios are very close (e.g., within 0.01)</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>if (Math.abs(imageRatio - targetRatio) &lt; 0.01) {</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>// Ratio is 16:9 - Success</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>imagePreview.src = dataUrl;</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                            </span>// Show the preview container and hide the placeholder</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>previewContainer.classList.remove('hidden');</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>placeholder.classList.add('hidden');</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                            </span>// Update instructions to normal color</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>instructions.textContent = "Upload another image to check.";</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>instructions.classList.remove('text-red-500');</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>instructions.classList.add('text-gray-400');</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>} else {</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>// Ratio is NOT 16:9 - Error</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>// Hide preview, show placeholder</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>previewContainer.classList.add('hidden');</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>placeholder.classList.remove('hidden');</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">                            </span>// Show error message</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>instructions.textContent = `Error: Image must be 16:9. (Uploaded: ${imageWidth}x${imageHeight})`;</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>instructions.classList.add('text-red-500');</p>
-<p class="p1"><span class="Apple-converted-space">                            </span>instructions.classList.remove('text-gray-400');</p>
-<p class="p1"><span class="Apple-converted-space">                        </span>}</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>};</p>
-<p class="p1"><span class="Apple-converted-space">                    </span>img.src = dataUrl;</p>
-<p class="p1"><span class="Apple-converted-space">                </span>};</p>
-<p class="p1"><span class="Apple-converted-space">                </span>reader.readAsDataURL(file);</p>
-<p class="p1"><span class="Apple-converted-space">            </span>}</p>
-<p class="p1"><span class="Apple-converted-space">            </span>// Reset file input so the 'change' event fires even</p>
-<p class="p1"><span class="Apple-converted-space">            </span>// if the same file is selected again (e.g., after a failed validation)</p>
-<p class="p1"><span class="Apple-converted-space">            </span>event.target.value = null;</p>
-<p class="p1"><span class="Apple-converted-space">        </span>});</p>
-<p class="p2"><br></p>
-<p class="p1"><span class="Apple-converted-space">        </span>// All template upload JS functions have been removed</p>
-<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
-<p class="p1">&lt;/body&gt;</p>
-<p class="p1">&lt;/html&gt;</p>
-<p class="p2"><br></p>
+<body class="text-gray-100 flex items-center justify-center min-h-screen p-4 md:p-8" style="background-color: #292C44;">
+
+    <main class="w-full max-w-4xl bg-gray-800 p-6 md:p-10 rounded-2xl shadow-2xl">
+        <h1 class="text-3xl md:text-4xl font-bold text-center text-white mb-6">
+            Image Safe Zone Viewer
+        </h1>
+        <p id="instructions" class="text-center text-gray-400 mb-8">
+            Upload an image (.jpg) to check it against the 16:9 safe zone.
+        </p>
+
+        <!-- Controls -->
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-center gap-6 mb-8">
+            <!-- File Upload Button (visible by default) -->
+            <div id="imageUploadContainer">
+                <label for="imageUpload" class="file-btn">
+                    Upload Image
+                </label>
+                <input type="file" id="imageUpload" class="hidden" accept="image/jpeg">
+            </div>
+
+            <!-- All template upload buttons and links have been removed -->
+        </div>
+
+        <!-- Image Preview Area -->
+        <div id="previewContainer" class="hidden bg-gray-900 p-2 rounded-lg border border-gray-700">
+            <!-- This container is forced to a 16:9 aspect ratio -->
+            <div class="relative w-full aspect-video bg-black rounded-md overflow-hidden">
+                <!-- The Image (will be letterboxed/pillarboxed inside) -->
+                <img id="imagePreview" src="#" alt="Image Preview" class="absolute inset-0 w-full h-full object-contain z-10">
+                
+                <!-- The Safe Zone Overlay -->
+                <!-- This is now a static CSS overlay that mimics your template -->
+                <div id="safeZoneOverlay" class="absolute inset-0 pointer-events-none z-20 flex items-center justify-center">
+                    <!-- 
+                        This inner box defines the "safe area".
+                        The box-shadow creates the red overlay *outside* of this box,
+                        effectively "cutting out" the center.
+                        The border creates the green line.
+                        (Proportions are an estimate from your template image)
+                    -->
+                    <div class="w-[70%] h-[80%] border-2 border-green-500" 
+                         style="box-shadow: 0 0 0 100vmax rgba(239, 68, 68, 0.5);">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Placeholder for when no image is loaded -->
+        <div id="placeholder" class="flex items-center justify-center h-64 bg-gray-700 rounded-lg border-2 border-dashed border-gray-500">
+            <p class="text-gray-400">Your 16:9 preview will appear here</p>
+        </div>
+
+    </main>
+
+    <script>
+        const imageUpload = document.getElementById('imageUpload');
+        const imagePreview = document.getElementById('imagePreview');
+        const previewContainer = document.getElementById('previewContainer');
+        const placeholder = document.getElementById('placeholder');
+        
+        // All template-related JS variables have been removed
+
+        // Text element
+        const instructions = document.getElementById('instructions');
+
+
+        // Function to handle image upload
+        imageUpload.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const dataUrl = e.target.result;
+
+                    // Create an in-memory image to check dimensions
+                    const img = new Image();
+                    img.onload = function() {
+                        const imageWidth = this.naturalWidth;
+                        const imageHeight = this.naturalHeight;
+                        const targetRatio = 16 / 9;
+                        const imageRatio = imageWidth / imageHeight;
+
+                        // Check if aspect ratios are very close (e.g., within 0.01)
+                        if (Math.abs(imageRatio - targetRatio) < 0.01) {
+                            // Ratio is 16:9 - Success
+                            imagePreview.src = dataUrl;
+
+                            // Show the preview container and hide the placeholder
+                            previewContainer.classList.remove('hidden');
+                            placeholder.classList.add('hidden');
+
+                            // Update instructions to normal color
+                            instructions.textContent = "Upload another image to check.";
+                            instructions.classList.remove('text-red-500');
+                            instructions.classList.add('text-gray-400');
+                        } else {
+                            // Ratio is NOT 16:9 - Error
+                            // Hide preview, show placeholder
+                            previewContainer.classList.add('hidden');
+                            placeholder.classList.remove('hidden');
+
+                            // Show error message
+                            instructions.textContent = `Error: Image must be 16:9. (Uploaded: ${imageWidth}x${imageHeight})`;
+                            instructions.classList.add('text-red-500');
+                            instructions.classList.remove('text-gray-400');
+                        }
+                    };
+                    img.src = dataUrl;
+                };
+                reader.readAsDataURL(file);
+            }
+            // Reset file input so the 'change' event fires even
+            // if the same file is selected again (e.g., after a failed validation)
+            event.target.value = null;
+        });
+
+        // All template upload JS functions have been removed
+    </script>
 </body>
 </html>

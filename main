@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Safe Zone Viewer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Use Inter font */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        /* Custom styles for a nicer file input button */
+        .file-btn {
+            background-color: #4f80e1; /* Your new button color */
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem; /* rounded-lg */
+            cursor: pointer;
+            font-weight: 500; /* medium */
+            transition: background-color 0.2s;
+            display: inline-block; /* Added for proper layout */
+            text-align: center;
+        }
+        .file-btn:hover {
+            background-color: #4069b4; /* A slightly darker shade for hover */
+        }
+
+        /* Removed the .change-template-link styles as it's no longer used */
+    </style>
+</head>
+<body class="text-gray-100 flex items-center justify-center min-h-screen p-4 md:p-8" style="background-color: #292C44;">
+
+    <main class="w-full max-w-4xl bg-gray-800 p-6 md:p-10 rounded-2xl shadow-2xl">
+        <h1 class="text-3xl md:text-4xl font-bold text-center text-white mb-6">
+            Image Safe Zone Viewer
+        </h1>
+        <p id="instructions" class="text-center text-gray-400 mb-8">
+            Upload an image (.jpg) to check it against the 16:9 safe zone.
+        </p>
+
+        <!-- Controls -->
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-center gap-6 mb-8">
+            <!-- File Upload Button (visible by default) -->
+            <div id="imageUploadContainer">
+                <label for="imageUpload" class="file-btn">
+                    Upload Image
+                </label>
+                <input type="file" id="imageUpload" class="hidden" accept="image/jpeg">
+            </div>
+
+            <!-- All template upload buttons and links have been removed -->
+        </div>
+
+        <!-- Image Preview Area -->
+        <div id="previewContainer" class="hidden bg-gray-900 p-2 rounded-lg border border-gray-700">
+            <!-- This container is forced to a 16:9 aspect ratio -->
+            <div class="relative w-full aspect-video bg-black rounded-md overflow-hidden">
+                <!-- The Image (will be letterboxed/pillarboxed inside) -->
+                <img id="imagePreview" src="#" alt="Image Preview" class="absolute inset-0 w-full h-full object-contain z-10">
+                
+                <!-- The Safe Zone Overlay -->
+                <!-- This is now a static CSS overlay that mimics your template -->
+                <div id="safeZoneOverlay" class="absolute inset-0 pointer-events-none z-20 flex items-center justify-center">
+                    <!-- 
+                        This inner box defines the "safe area".
+                        The box-shadow creates the red overlay *outside* of this box,
+                        effectively "cutting out" the center.
+                        The border creates the green line.
+                        (Proportions are an estimate from your template image)
+                    -->
+                    <div class="w-[70%] h-[80%] border-2 border-green-500" 
+                         style="box-shadow: 0 0 0 100vmax rgba(239, 68, 68, 0.5);">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Placeholder for when no image is loaded -->
+        <div id="placeholder" class="flex items-center justify-center h-64 bg-gray-700 rounded-lg border-2 border-dashed border-gray-500">
+            <p class="text-gray-400">Your 16:9 preview will appear here</p>
+        </div>
+
+    </main>
+
+    <script>
+        const imageUpload = document.getElementById('imageUpload');
+        const imagePreview = document.getElementById('imagePreview');
+        const previewContainer = document.getElementById('previewContainer');
+        const placeholder = document.getElementById('placeholder');
+        
+        // All template-related JS variables have been removed
+
+        // Text element
+        const instructions = document.getElementById('instructions');
+
+
+        // Function to handle image upload
+        imageUpload.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    const dataUrl = e.target.result;
+
+                    // Create an in-memory image to check dimensions
+                    const img = new Image();
+                    img.onload = function() {
+                        const imageWidth = this.naturalWidth;
+                        const imageHeight = this.naturalHeight;
+                        const targetRatio = 16 / 9;
+                        const imageRatio = imageWidth / imageHeight;
+
+                        // Check if aspect ratios are very close (e.g., within 0.01)
+                        if (Math.abs(imageRatio - targetRatio) < 0.01) {
+                            // Ratio is 16:9 - Success
+                            imagePreview.src = dataUrl;
+
+                            // Show the preview container and hide the placeholder
+                            previewContainer.classList.remove('hidden');
+                            placeholder.classList.add('hidden');
+
+                            // Update instructions to normal color
+                            instructions.textContent = "Upload another image to check.";
+                            instructions.classList.remove('text-red-500');
+                            instructions.classList.add('text-gray-400');
+                        } else {
+                            // Ratio is NOT 16:9 - Error
+                            // Hide preview, show placeholder
+                            previewContainer.classList.add('hidden');
+                            placeholder.classList.remove('hidden');
+
+                            // Show error message
+                            instructions.textContent = `Error: Image must be 16:9. (Uploaded: ${imageWidth}x${imageHeight})`;
+                            instructions.classList.add('text-red-500');
+                            instructions.classList.remove('text-gray-400');
+                        }
+                    };
+                    img.src = dataUrl;
+                };
+                reader.readAsDataURL(file);
+            }
+            // Reset file input so the 'change' event fires even
+            // if the same file is selected again (e.g., after a failed validation)
+            event.target.value = null;
+        });
+
+        // All template upload JS functions have been removed
+    </script>
+</body>
+</html>
+

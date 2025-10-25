@@ -95,6 +95,13 @@
         // Text element
         const instructions = document.getElementById('instructions');
 
+        // Helper function to find the greatest common divisor
+        function gcd(a, b) {
+            if (b === 0) {
+                return a;
+            }
+            return gcd(b, a % b);
+        }
 
         // Function to handle image upload
         imageUpload.addEventListener('change', (event) => {
@@ -131,8 +138,13 @@
                             previewContainer.classList.add('hidden');
                             placeholder.classList.remove('hidden');
 
-                            // Show error message
-                            instructions.textContent = `Error: Image must be 16:9. (Uploaded: ${imageWidth}x${imageHeight})`;
+                            // Calculate the simplified ratio
+                            const divisor = gcd(imageWidth, imageHeight);
+                            const ratioWidth = imageWidth / divisor;
+                            const ratioHeight = imageHeight / divisor;
+
+                            // Show error message with the ratio
+                            instructions.textContent = `Error: Image must be 16:9. (Uploaded: ${ratioWidth}:${ratioHeight})`;
                             instructions.classList.add('text-red-500');
                             instructions.classList.remove('text-gray-400');
                         }
@@ -150,3 +162,4 @@
     </script>
 </body>
 </html>
+

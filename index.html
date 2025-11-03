@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Safe Zone Viewer</title>
+    <title>Image Tool Hub</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* Use Inter font */
@@ -13,7 +13,7 @@
         
         /* Custom styles for a nicer file input button */
         .file-btn {
-            background-color: #4f80e1; /* Your new button color */
+            background-color: #4f80e1;
             color: white;
             padding: 0.75rem 1.5rem;
             border-radius: 0.5rem; /* rounded-lg */
@@ -27,91 +27,183 @@
             background-color: #4069b4; /* A slightly darker shade for hover */
         }
 
-        /* Removed the .change-template-link styles as it's no longer used */
+        /* Style for the tool cards on the homepage */
+        .tool-card {
+            background-color: #374151; /* gray-700 */
+            border-radius: 0.75rem; /* rounded-xl */
+            padding: 1.5rem;
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+            border: 1px solid #4B5563; /* gray-600 */
+        }
+        .tool-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-color: #4f80e1;
+        }
+
+        /* Style for the "Back" button */
+        .back-btn {
+            background: none;
+            border: 1px solid #4B5563; /* gray-600 */
+            color: #D1D5DB; /* gray-300 */
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .back-btn:hover {
+            background-color: #374151; /* gray-700 */
+            border-color: #6B7280; /* gray-500 */
+        }
     </style>
 </head>
 <body class="text-gray-100 flex items-center justify-center min-h-screen p-4 md:p-8" style="background-color: #292C44;">
 
     <main class="w-full max-w-4xl bg-gray-800 p-6 md:p-10 rounded-2xl shadow-2xl">
-        <h1 class="text-3xl md:text-4xl font-bold text-center text-white mb-6">
-            Image Safe Zone Viewer
-        </h1>
-        <p id="instructions" class="text-center text-gray-400 mb-8">
-            Upload an image (.jpg) to check it against the 16:9 safe zone.
-        </p>
 
-        <!-- Controls -->
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-center gap-6 mb-8">
-            <!-- File Upload Button (visible by default) -->
-            <div id="imageUploadContainer">
-                <label for="imageUpload" class="file-btn">
-                    Upload Image
-                </label>
-                <input type="file" id="imageUpload" class="hidden" accept="image/jpeg">
-            </div>
+        <!-- Page: Homepage -->
+        <div id="pageHome">
+            <h1 class="text-3xl md:text-4xl font-bold text-center text-white mb-8">
+                Image Tool Hub
+            </h1>
+            <p class="text-center text-gray-400 mb-10">
+                Choose a tool to get started.
+            </p>
 
-            <!-- All template upload buttons and links have been removed -->
-        </div>
-
-        <!-- Image Preview Area -->
-        <div id="previewContainer" class="hidden bg-gray-900 p-2 rounded-lg border border-gray-700">
-            <!-- This container is forced to a 16:9 aspect ratio -->
-            <div class="relative w-full aspect-video bg-black rounded-md overflow-hidden">
-                <!-- The Image (will be letterboxed/pillarboxed inside) -->
-                <img id="imagePreview" src="#" alt="Image Preview" class="absolute inset-0 w-full h-full object-contain z-10">
+            <!-- Tool Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Tool 1: Safe Zone Viewer -->
+                <div id="goToSafeZoneBtn" class="tool-card">
+                    <h2 class="text-xl font-semibold text-white mb-2">16:9 Safe Zone Viewer</h2>
+                    <p class="text-gray-400">Check a 16:9 JPG image against a standard safe zone overlay.</p>
+                </div>
                 
-                <!-- The Safe Zone Overlay -->
-                <!-- This is now a static CSS overlay that mimics your template -->
-                <div id="safeZoneOverlay" class="absolute inset-0 pointer-events-none z-20 flex items-center justify-center">
-                    <!-- 
-                        This inner box defines the "safe area".
-                        The box-shadow creates the red overlay *outside* of this box,
-                        effectively "cutting out" the center.
-                        The border creates the green line.
-                        (Proportions are an estimate from your template image)
-                    -->
-                    <div class="w-[70%] h-[80%] border-2 border-green-500" 
-                         style="box-shadow: 0 0 0 100vmax rgba(239, 68, 68, 0.5);">
-                    </div>
+                <!-- Add more tool cards here in the future -->
+                <div class="tool-card !cursor-not-allowed opacity-50">
+                    <h2 class="text-xl font-semibold text-white mb-2">More Tools Coming...</h2>
+                    <p class="text-gray-400">Check back later for more image utilities.</p>
                 </div>
             </div>
         </div>
-        
-        <!-- Placeholder for when no image is loaded -->
-        <div id="placeholder" class="flex items-center justify-center h-64 bg-gray-700 rounded-lg border-2 border-dashed border-gray-500">
-            <p class="text-gray-400">Your 16:9 preview will appear here</p>
+
+        <!-- Page: Safe Zone Viewer (Hidden by default) -->
+        <div id="pageSafeZone" class="hidden">
+            <!-- Header with Back Button -->
+            <div class="flex items-center justify-between mb-6">
+                <button id="backToHomeBtn" class="back-btn">
+                    &larr; Back to Home
+                </button>
+                <h1 class="text-3xl md:text-4xl font-bold text-center text-white">
+                    Safe Zone Viewer
+                </h1>
+                <div class="w-24"></div> <!-- Spacer -->
+            </div>
+            
+            <p id="instructions" class="text-center text-gray-400 mb-8">
+                Upload an image (.jpg) to check it against the 16:9 safe zone.
+            </p>
+
+            <!-- Controls -->
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-center gap-6 mb-8">
+                <!-- File Upload Button -->
+                <div id="imageUploadContainer">
+                    <label for="imageUpload" class="file-btn">
+                        Upload Image
+                    </label>
+                    <input type="file" id="imageUpload" class="hidden" accept="image/jpeg">
+                </div>
+            </div>
+
+            <!-- Image Preview Area -->
+            <div id="previewContainer" class="hidden bg-gray-900 p-2 rounded-lg border border-gray-700">
+                <div class="relative w-full aspect-video bg-black rounded-md overflow-hidden">
+                    <img id="imagePreview" src="#" alt="Image Preview" class="absolute inset-0 w-full h-full object-contain z-10">
+                    <div id="safeZoneOverlay" class="absolute inset-0 pointer-events-none z-20 flex items-center justify-center">
+                        <div class="w-[70%] h-[80%] border-2 border-green-500" 
+                             style="box-shadow: 0 0 0 100vmax rgba(239, 68, 68, 0.5);">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Placeholder for when no image is loaded -->
+            <div id="placeholder" class="flex items-center justify-center h-64 bg-gray-700 rounded-lg border-2 border-dashed border-gray-500">
+                <p class="text-gray-400">Your 16:9 preview will appear here</p>
+            </div>
         </div>
 
     </main>
 
     <script>
+        // --- Page Navigation ---
+        const pageHome = document.getElementById('pageHome');
+        const pageSafeZone = document.getElementById('pageSafeZone');
+        
+        const goToSafeZoneBtn = document.getElementById('goToSafeZoneBtn');
+        const backToHomeBtn = document.getElementById('backToHomeBtn');
+
+        // --- Safe Zone DOM Elements ---
         const imageUpload = document.getElementById('imageUpload');
         const imagePreview = document.getElementById('imagePreview');
         const previewContainer = document.getElementById('previewContainer');
         const placeholder = document.getElementById('placeholder');
-        
-        // All template-related JS variables have been removed
-
-        // Text element
         const instructions = document.getElementById('instructions');
 
-        // Helper function to find the greatest common divisor
-        function gcd(a, b) {
-            if (b === 0) {
-                return a;
+
+        // --- Page Navigation Logic ---
+
+        /**
+         * Hides all pages and shows the one with the specified ID.
+         * @param {string} pageId - The ID of the page to show.
+         */
+        function showPage(pageId) {
+            pageHome.classList.add('hidden');
+            pageSafeZone.classList.add('hidden');
+            
+            const pageToShow = document.getElementById(pageId);
+            if (pageToShow) {
+                pageToShow.classList.remove('hidden');
             }
+        }
+
+        /**
+         * Resets the Safe Zone tool to its initial state.
+         */
+        function resetSafeZone() {
+            imagePreview.src = '#';
+            previewContainer.classList.add('hidden');
+            placeholder.classList.remove('hidden');
+            instructions.textContent = "Upload an image (.jpg) to check it against the 16:9 safe zone.";
+            instructions.classList.remove('text-red-500');
+            instructions.classList.add('text-gray-400');
+            imageUpload.value = null; // Clear file input
+        }
+
+
+        // --- Navigation Event Listeners ---
+        goToSafeZoneBtn.addEventListener('click', () => {
+            showPage('pageSafeZone');
+        });
+
+        backToHomeBtn.addEventListener('click', () => {
+            resetSafeZone();
+            showPage('pageHome');
+        });
+
+        // --- Safe Zone Tool Logic ---
+
+        function gcd(a, b) {
+            if (b === 0) { return a; }
             return gcd(b, a % b);
         }
 
-        // Function to handle image upload
         imageUpload.addEventListener('change', (event) => {
             const file = event.target.files[0];
             if (file) {
                 const reader = new FileReader();
                 reader.onload = (e) => {
                     const dataUrl = e.target.result;
-
-                    // Create an in-memory image to check dimensions
                     const img = new Image();
                     img.onload = function() {
                         const imageWidth = this.naturalWidth;
@@ -119,31 +211,19 @@
                         const targetRatio = 16 / 9;
                         const imageRatio = imageWidth / imageHeight;
 
-                        // Check if aspect ratios are very close (e.g., within 0.01)
                         if (Math.abs(imageRatio - targetRatio) < 0.01) {
-                            // Ratio is 16:9 - Success
                             imagePreview.src = dataUrl;
-
-                            // Show the preview container and hide the placeholder
                             previewContainer.classList.remove('hidden');
                             placeholder.classList.add('hidden');
-
-                            // Update instructions to normal color
                             instructions.textContent = "Upload another image to check.";
                             instructions.classList.remove('text-red-500');
                             instructions.classList.add('text-gray-400');
                         } else {
-                            // Ratio is NOT 16:9 - Error
-                            // Hide preview, show placeholder
                             previewContainer.classList.add('hidden');
                             placeholder.classList.remove('hidden');
-
-                            // Calculate the simplified ratio
                             const divisor = gcd(imageWidth, imageHeight);
                             const ratioWidth = imageWidth / divisor;
                             const ratioHeight = imageHeight / divisor;
-
-                            // Show error message with the ratio
                             instructions.textContent = `Error: Image must be 16:9. (Uploaded: ${ratioWidth}:${ratioHeight})`;
                             instructions.classList.add('text-red-500');
                             instructions.classList.remove('text-gray-400');
@@ -153,12 +233,12 @@
                 };
                 reader.readAsDataURL(file);
             }
-            // Reset file input so the 'change' event fires even
-            // if the same file is selected again (e.g., after a failed validation)
             event.target.value = null;
         });
 
-        // All template upload JS functions have been removed
+        // Show the homepage on initial load
+        showPage('pageHome'); 
+
     </script>
 </body>
 </html>
